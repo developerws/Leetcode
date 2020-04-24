@@ -1,0 +1,57 @@
+#include<iostream>
+#include<vector>
+#include<map>
+#include<algorithm>
+#include <string>
+using namespace std;
+class Solution {
+public:
+	string reverseVowels(string s) {
+		/*下面的耗时和内存消耗贼大*/
+		/*int i = 0;
+		map<int, char> a;
+		char goal[10] = { 'a','e','i' ,'o' ,'u' ,'A' ,'E' ,'I','O','U' };
+		for (i; i < s.length(); i++) {
+			if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u') {
+				a[i] = s[i];
+			}
+		}
+		map<int, char>::iterator first_iter;
+		map<int, char>::iterator end_iter = a.end();
+		char temp;
+		for (first_iter = a.begin(), end_iter = --end_iter; first_iter->first <= end_iter->first; ++first_iter, --end_iter) {
+			temp = first_iter->second;
+			first_iter->second = end_iter->second;
+			end_iter->second = temp;
+		}
+		for (first_iter = a.begin(); first_iter != a.end(); ++first_iter) {
+			s[first_iter->first] = first_iter->second;
+		}
+		return s;*/
+
+
+		/*改良*/
+		vector<int> vec;
+		int i = 0, temp ;
+		int first, end;
+		for (i; i < s.length(); i++) {
+			if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u' || s[i] == 'A' || s[i] == 'E' || s[i] == 'I' || s[i] == 'O' || s[i] == 'U') {
+				vec.push_back(i);
+			}
+		}
+		if (vec.size() == 0)   return s;
+		for (first = 0, end = vec.size() - 1; first < end; first++, end--) {
+			temp = s[vec[first]];
+			s[vec[first]] = s[vec[end]];
+			s[vec[end]] = temp;
+			
+		}
+		return s;
+	}
+};
+int main() {
+	Solution s = Solution();
+	string a = s.reverseVowels(".");
+	cout << a;
+	system("pause");
+}
